@@ -12,7 +12,7 @@ class NotaSeeder extends Seeder
      */
     public function run(): void
     {
-        Notas::factory(500)->create();
+        Notas::factory(100)->create();
 
     }
 }
