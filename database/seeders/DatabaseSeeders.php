@@ -14,12 +14,8 @@ class DatabaseSeeders extends Seeder
     {
         $this->call ([
             ContactoSeeder::class,
-        ]);
-        $this->call ([
-            EventoSeeder::class,
-        ]);
-        $this->call ([
             NotaSeeder::class,
+            EventoSeeder::class,
         ]);
     }
 }
