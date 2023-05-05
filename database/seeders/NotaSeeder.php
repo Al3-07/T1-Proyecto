@@ -12,7 +12,13 @@ class NotaSeeder extends Seeder
      */
     public function run(): void
     {
-        Notas::factory(100)->create();
+        DB::table('Notas')->insert([
+            'texto'=>Str::random(10),
+            'fecha'=>Str::random(10),
+            
+
+        ]);
+    
 
     }
 }

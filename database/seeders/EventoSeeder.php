@@ -12,6 +12,13 @@ class EventoSeeder extends Seeder
      */
     public function run(): void
     {
-        Eventos::factory(100)->create();
+        DB::table('Eventos')->insert([
+            'titulo'=>Str::random(10),
+            'descripcion'=>Str::random(10),
+            'fecha_inicio'=>Str::random(10),
+            'fecha_fin'=>Str::random(10),
+
+        ]);
+    
     }
 }

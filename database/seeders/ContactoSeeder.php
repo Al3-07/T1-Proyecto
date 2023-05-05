@@ -10,8 +10,15 @@ class ContactoSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run():void
     {
-        Contactos::factory(100)->create();
+        DB::table('Contactos')->insert([
+            'nombre'=>Str::random(10),
+            'apellido'=>Str::random(10),
+            'correo_electronico'=>Str::random(10).'@gmail.com',
+            'telefono'=>Str::random(10),
+
+        ]);
+    
     }
 }
