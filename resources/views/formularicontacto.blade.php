@@ -13,9 +13,9 @@
 <label> Apellido </label>
 <input type="text" name="apellido">
 <label> Correo </label>
-<input type="text" name="correo">
+<input type="email" name="correo">
 <label> Telefono</label>
-<input type="text" name="tel">
+<input type="tel" name="tel">
 
 <button type="submit" class="btn btn primary" >Guardar
     <input type= "reset" value="borrar">

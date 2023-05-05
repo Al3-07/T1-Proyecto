@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Nota;
 
 class NotaSeeder extends Seeder
 {
@@ -12,13 +13,6 @@ class NotaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('Notas')->insert([
-            'texto'=>Str::random(10),
-            'fecha'=>Str::random(10),
-            
-
-        ]);
-    
-
+        Nota::Factory(15)->create();
     }
 }

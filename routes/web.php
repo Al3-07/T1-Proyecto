@@ -40,6 +40,7 @@ Route::put('/Contactos/editar/{id}',[ContactoController::class,'update'] )
 Route::delete('/Contactos/borrar/{id}',[ContactoController::class,'destroy'] )
 ->name('Contacto.borrar')->where ('id','[0-9]+'); //eliminar
 
+
 //Rutas Evento
 Route::get('/Eventos',[EventoController::class,'index'] )
 ->name('Evento.index');
