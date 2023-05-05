@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    Inicio
+    Inicio <br>
 
     Contacto: <a href="{{route('Contacto.index')}}"> Ver </a> <br>
     Notas: <a href="{{route('nota.index')}}"> Ver </a> <br>

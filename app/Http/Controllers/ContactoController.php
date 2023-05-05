@@ -23,7 +23,7 @@ class ContactoController extends Controller
         $request->validate([
             'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
             'apellido' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
-            'tel' => 'required|regex:/^[2,3,8,9][0-9]{3}+[-][0-9]{4}+$/|min:9|max:9|unique:contactos,telefono',
+            'tel' => 'required|unique:contactos,telefono',
             'correo'=>'required|regex:/(.+)@(.+)\.(.+)$/|min:12|max:50|unique:contactos,correo_electronico',
 
         ],[
@@ -44,9 +44,6 @@ class ContactoController extends Controller
             'correo.unique'=>'El correo ingresado ya existe',
 
             'tel.required' => 'El número telefónico es obligatorio',
-            'tel.regex'=>'El número telefónico debe iniciar con (2),(3),(8) ó (9)',
-            'tel.min'=>'El número telefónico debe tener 9 carácteres',
-            'tel.max'=>'El número telefónico debe tener 9 carácteres',
             'tel.unique'=>'El teléfono ingresado ya existe',
 
         ]);
@@ -78,7 +75,7 @@ class ContactoController extends Controller
             'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
             'apellido' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
             'correo'=>['required','regex:/(.+)@(.+)\.(.+)$/','min:12','max:50'],
-            'tel' => ['required','regex:/^[2,3,8,9][0-9]{3}+[-][0-9]{4}+$/','min:9','max:9'],
+            'tel' => ['required',],
         ],[
             'nombre.required' => 'El nombre no puede estar vacío',
             'nombre.regex'=> 'El nombre tiene caracteres no permitidos',
@@ -97,9 +94,6 @@ class ContactoController extends Controller
             'correo.unique'=>'El correo ingresado ya existe',
 
             'tel.required' => 'El número telefónico es obligatorio',
-            'tel.regex'=>'El número telefónico debe iniciar con (2),(3),(8) ó (9)',
-            'tel.min'=>'El número telefónico debe tener 9 carácteres',
-            'tel.max'=>'El número telefónico debe tener 9 carácteres',
             'tel.unique'=>'El teléfono ingresado ya existe',
 
         ]);

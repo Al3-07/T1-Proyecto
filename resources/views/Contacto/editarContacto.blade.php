@@ -21,25 +21,25 @@
 
                             <label for="nombre">Nombre:</label>
                             <input type="text" class="form-control" name ="nombre" id ="nombre" minlength="3" maxlength="50"
-                            placeholder="Nombre del estudiante" value="{{old('nombre', $contacto->nombre)}}" required>
+                            value="{{old('nombre', $contacto->nombre)}}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="apellido">Apellido:</label>
                             <input type="text" class="form-control" name ="apellido" id="apellido" minlength="3" maxlength="50"
-                            placeholder="Apellido del estudiante" value="{{old('apellido', $contacto->apellido)}}" required>
+                             value="{{old('apellido', $contacto->apellido)}}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="correo">Correo electrónico</label>
                             <input type="email" class="form-control" name ="correo" id="correo" minlength="12" maxlength="50"
-                            placeholder="example@mail.com" value="{{old('correo', $contacto->correo_electronico)}}" required>
+                             value="{{old('correo', $contacto->correo_electronico)}}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="tel">Teléfono</label>
-                            <input type="text" class="form-control" name ="tel" id="tel" minlength="9" maxlength="9"
-                            placeholder="####-####" value="{{old('tel', $contacto->telefono)}}" required>
+                            <input type="text" class="form-control" name ="tel" id="tel" 
+                            value="{{old('tel', $contacto->telefono)}}" required>
                         </div>
                         <br>
                         <div class="" style="text-align: center;">
