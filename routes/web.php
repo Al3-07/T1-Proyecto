@@ -1,7 +1,8 @@
 <?php
-use App\Http\Controller\ContactoController;
-use App\Http\Controller\EventoController;
-use App\Http\Controller\NotaController;
+
+use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\EventoController;
+use App\Http\Controllers\NotaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +30,7 @@ Route::get('/Contactos/crear',[ContactoController::class,'create'])
 ->name('Contacto.create');
 
 Route::post('/Contactos/crear',[ContactoController::class,'store'])
-->name('Contacto.guardar');
+->name('Contacto.store');
 
 Route::get('/Contactos/editar/{id}',[ContactoController::class,'edit'])
 ->name('Contacto.edit')->where ('id','[0-9]+'); //editar
@@ -38,8 +39,7 @@ Route::put('/Contactos/editar/{id}',[ContactoController::class,'update'] )
 ->name('Contacto.update')->where ('id','[0-9]+'); //actualizar
 
 Route::delete('/Contactos/borrar/{id}',[ContactoController::class,'destroy'] )
-->name('Contacto.borrar')->where ('id','[0-9]+'); //eliminar
-
+->name('Contacto.destroy')->where ('id','[0-9]+'); //eliminar
 
 //Rutas Evento
 Route::get('/Eventos',[EventoController::class,'index'] )
@@ -58,7 +58,7 @@ Route::get('/Eventos/editar/{id}',[EventoController::class,'edit'])
 ->name('Evento.edit')->where ('id','[0-9]+'); //editar
 
 Route::put('/Eventos/editar/{id}',[EventoController::class,'update'] )
-->name('Contacto.update')->where ('id','[0-9]+'); //actualizar
+->name('Evento.update')->where ('id','[0-9]+'); //actualizar
 
 Route::delete('/Eventos/borrar/{id}',[EventoController::class,'destroy'] )
 ->name('Evento.borrar')->where ('id','[0-9]+'); //eliminar

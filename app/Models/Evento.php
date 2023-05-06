@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Eventos extends Model
+class Evento extends Model
 {
     use HasFactory;
-    public function eventos() {
-        return $this->belongsTo(Contactos::class);
+    public function contacto() {
+        return $this->belongsTo(Contacto::class);
     }
 }
+

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Contacto;
@@ -11,8 +12,8 @@ class ContactoSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run():void
+    public function run(): void
     {
-        Contacto::Factory(15)->create();
+        Contacto::factory(10)->create();
     }
 }

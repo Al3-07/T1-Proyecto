@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Contacto;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Nota;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Nota>
  */
-class NotFactory extends Factory
+class NotaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +19,8 @@ class NotFactory extends Factory
     {
         return [
             'texto' => $this -> faker->paragraph,
-            'fecha' =>$this-> $faker->datetime,
+            'fecha' =>$this-> faker->dateTime(),
+            'contacto_id'=>Contacto::get('id')->random(),
         ];
     }
 }

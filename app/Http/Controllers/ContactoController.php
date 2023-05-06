@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Contacto;
 use Illuminate\Http\Request;
 
-
 class ContactoController extends Controller
 {
     public function index(){
         $contactos=Contacto::paginate(10);
-        return view ('raizcontacto')->with('contactos',$contactos);
+        return view('Contacto.RaizContacto')->with('contactos',$contactos);
     }
     public function show($id){
         $contactos=Contacto::findOrfail($id);
@@ -18,25 +17,49 @@ class ContactoController extends Controller
 
     }
     public function create(){
-        return view(view:'formulariocontacto'); //controlador para el formulario
+        return view('Contacto.formularioContacto'); //Envia al formulario
     }
     public function store(Request $request){
         $request->validate([
-            'nombre'=>'required|alpha',
-            'apellido'=>'required|alpha',
-            'correo'=>'required|email|unique',
-            'telefono'=>'required|numeric',
+            'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
+            'apellido' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
+            'tel' => 'required|regex:/^[2,3,8,9][0-9]{3}+[-][0-9]{4}+$/|min:9|max:9|unique:contactos,telefono',
+            'correo'=>'required|regex:/(.+)@(.+)\.(.+)$/|min:12|max:50|unique:contactos,correo_electronico',
+
+        ],[
+            'nombre.required' => 'El nombre no puede estar vacío',
+            'nombre.regex'=> 'El nombre tiene caracteres no permitidos',
+            'nombre.max' => 'El nombre es muy extenso',
+            'nombre.min' => 'El nombre es muy corto',
+
+            'apellido.required' => 'El apellido no puede estar vacío',
+            'apellido.regex'=> 'El apellido tiene caracteres no permitidos',
+            'apellido.max' => 'El apellido es muy extenso',
+            'apellido.min' => 'El apellido es muy corto',
+
+            'correo.required'=>'El correo es obligatorio',
+            'correo.regex'=>'El correo es incorrecto, ejemplo:(usuario@mail.com ó usuario@mail.es)' ,
+            'correo.min'=>'El correo es muy corto' ,
+            'correo.max'=>'El correo es muy extenso' ,
+            'correo.unique'=>'El correo ingresado ya existe',
+
+            'tel.required' => 'El número telefónico es obligatorio',
+            'tel.regex'=>'El número telefónico debe iniciar con (2),(3),(8) ó (9)',
+            'tel.min'=>'El número telefónico debe tener 9 carácteres',
+            'tel.max'=>'El número telefónico debe tener 9 carácteres',
+            'tel.unique'=>'El teléfono ingresado ya existe',
 
         ]);
+        
         $nuevoContacto = new Contacto();
-        $nuevoContacto->nombre=$request->input(key:'nombre');
-        $nuevoContacto->apellido=$request->input(key:'apellido');
-        $nuevoContacto->correo_electronico=$request->input(key:'correo');
-        $nuevoContacto->telefono=$request->input(key:'tel');
+        $nuevoContacto->nombre=$request->input('nombre');
+        $nuevoContacto->apellido=$request->input('apellido');
+        $nuevoContacto->correo_electronico=$request->input('correo');
+        $nuevoContacto->telefono=$request->input('tel');
 
         $creado=$nuevoContacto->save();
         if($creado){
-            return redirect()->route()->with ('mensaje','El contacto fue creado exitosamente');
+            return redirect()->route('Contacto.index')->with ('mensaje','El contacto fue creado exitosamente');
         }else{
             return back();
         }
@@ -45,26 +68,61 @@ class ContactoController extends Controller
     //editar
     public function edit ($id){
         $contacto = Contacto::findOrfail($id);
-        return view('formulariocontacto')->with('contacto',$contacto);
+        return view('Contacto.editarContacto')->with('contacto',$contacto);
     }
     //actualizar
     public function update (Request $request , $id){
+        $contacto = Contacto::findOrFail($id);
 
-        $request ->validate([
-            'nombre'=>'required|alpha',
-            'apellido'=>'required|alpha',
-            'correo'=>'required|email|unique',
-            'telefono'=>'required|numeric',
+        $request->validate([
+            'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
+            'apellido' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
+            'correo'=>['required','regex:/(.+)@(.+)\.(.+)$/','min:12','max:50'],
+            'tel' => ['required','regex:/^[2,3,8,9][0-9]{3}+[-][0-9]{4}+$/','min:9','max:9'],
+        ],[
+            'nombre.required' => 'El nombre no puede estar vacío',
+            'nombre.regex'=> 'El nombre tiene caracteres no permitidos',
+            'nombre.max' => 'El nombre es muy extenso',
+            'nombre.min' => 'El nombre es muy corto',
+
+            'apellido.required' => 'El apellido no puede estar vacío',
+            'apellido.regex'=> 'El apellido tiene caracteres no permitidos',
+            'apellido.max' => 'El apellido es muy extenso',
+            'apellido.min' => 'El apellido es muy corto',
+
+            'correo.required'=>'El correo es obligatorio',
+            'correo.regex'=>'El correo es incorrecto, ejemplo:(usuario@mail.com ó usuario@mail.es)' ,
+            'correo.min'=>'El correo es muy corto' ,
+            'correo.max'=>'El correo es muy extenso' ,
+            'correo.unique'=>'El correo ingresado ya existe',
+
+            'tel.required' => 'El número telefónico es obligatorio',
+            'tel.regex'=>'El número telefónico debe iniciar con (2),(3),(8) ó (9)',
+            'tel.min'=>'El número telefónico debe tener 9 carácteres',
+            'tel.max'=>'El número telefónico debe tener 9 carácteres',
+            'tel.unique'=>'El teléfono ingresado ya existe',
+
         ]);
-        $contacto = $Contacto();
-        $contacto->nombre=$request->input(key:'nombre');
-        $contacto->apellido=$request->input(key:'apellido');
-        $contacto->correo_electronico=$request->input(key:'correo');
-        $contacto->telefono=$request->input(key:'tel');
-        $creado=$nuevoContacto->save();
-        
 
+        
+        $contacto->nombre=$request->input('nombre');
+        $contacto->apellido=$request->input('apellido');
+        $contacto->correo_electronico=$request->input('correo');
+        $contacto->telefono=$request->input('tel');
+        $creado=$contacto->save();
+      
+        
+        if ($creado) {
+            return redirect()->route('Contacto.index')
+            ->with('mensaje', "".$contacto->nombre." se actualizó correctamente");
+        }else{
+            return back();
+        }
 
     }
+    public function destroy($id)
+    {
+        Contacto::destroy($id);
+        return redirect()->route('Contacto.index')->with('mensaje', 'Contacto borrado correctamente');
+    }
 }
-

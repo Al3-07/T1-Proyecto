@@ -1,4 +1,4 @@
-@extends('plantilla')
+@extends('plantillas.plantilla')
 @section('contenido')
 
 <h1> Nota </h1>

@@ -9,10 +9,9 @@ class Contacto extends Model
 {
     use HasFactory;
     public function eventos() {
-        return $this->hasmany(Eventos::class);
+        return $this->hasmany(Evento::class);
     }
     public function notas() {
-        return $this->hasmany(Notas::class);
+        return $this->hasmany(Nota::class);
     }
-    
 }

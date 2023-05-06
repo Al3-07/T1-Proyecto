@@ -3,14 +3,11 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Contacto;
-
-
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Contacto>
  */
-class ContactFactory extends Factory
+class ContactoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,8 +19,8 @@ class ContactFactory extends Factory
         return [
             'nombre' => $this -> faker->firstName,
             'apellido' => $this -> faker->lastName,
-            'correo_electronico' => $this ->faker->email->unique->safeEmail,
-            'telefono' =>$this-> $faker->phoneNumber,
+            'correo_electronico' => $this->faker->unique()->email,
+            'telefono' =>$this-> faker->phoneNumber,
         ];
     }
 }
